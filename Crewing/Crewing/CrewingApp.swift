@@ -11,7 +11,7 @@ import SwiftUI
 struct CrewingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView() //r
+            MainTabView()
         }
     }
 }
