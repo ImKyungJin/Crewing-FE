@@ -4,6 +4,7 @@ struct HomeView: View {
     
     @State private var searchText: String = "" // TextField에 입력된 값을 저장
     @State private var categoryName: String = "" // 선택된 카테고리
+    @State private var categoryIndex: Int = 0 // 선택된 카테고리의 인덱스
     
     var body: some View {
         
@@ -52,18 +53,18 @@ struct HomeView: View {
                 
                 
                 HStack {
-                    CategoryButton(imageName: "desktopcomputer", buttonName: "IT/데이터", destination: CategoryListView(categoryName: "IT/데이터"))
-                    CategoryButton(imageName: "camera.fill", buttonName: "사진/촬영", destination: CategoryListView(categoryName: "사진/촬영"))
-                    CategoryButton(imageName: "book", buttonName: "인문학/독서", destination: CategoryListView(categoryName: "인문학/독서"))
-                    CategoryButton(imageName: "airplane", buttonName: "여행", destination: CategoryListView(categoryName: "여행"))
-                    CategoryButton(imageName: "tennisball.fill", buttonName: "스포츠", destination: CategoryListView(categoryName: "스포츠"))
+                    CategoryButton(imageName: "desktopcomputer", buttonName: "IT/데이터", destination: CategoryListView(categoryIndex: 1))
+                    CategoryButton(imageName: "camera.fill", buttonName: "사진/촬영", destination: CategoryListView(categoryIndex: 2))
+                    CategoryButton(imageName: "book", buttonName: "인문학/독서", destination: CategoryListView(categoryIndex: 3))
+                    CategoryButton(imageName: "airplane", buttonName: "여행", destination: CategoryListView(categoryIndex: 4))
+                    CategoryButton(imageName: "tennisball.fill", buttonName: "스포츠", destination: CategoryListView(categoryIndex: 5))
                 }
                 HStack {
-                    CategoryButton(imageName: "pencil.and.scribble", buttonName: "문화/예술", destination: CategoryListView(categoryName: "문화/예술"))
-                    CategoryButton(imageName: "music.mic", buttonName: "댄스", destination: CategoryListView(categoryName: "댄스"))
-                    CategoryButton(imageName: "music.note.list", buttonName: "음악/악기", destination: CategoryListView(categoryName: "음악/악기"))
-                    CategoryButton(imageName: "figure.and.child.holdinghands", buttonName: "봉사활동", destination: CategoryListView(categoryName: "봉사활동"))
-                    CategoryButton(imageName: "list.dash", buttonName: "기타", destination: CategoryListView(categoryName: "기타"))
+                    CategoryButton(imageName: "pencil.and.scribble", buttonName: "문화/예술", destination: CategoryListView(categoryIndex: 6))
+                    CategoryButton(imageName: "music.mic", buttonName: "댄스", destination: CategoryListView(categoryIndex: 7))
+                    CategoryButton(imageName: "music.note.list", buttonName: "음악/악기", destination: CategoryListView(categoryIndex: 8))
+                    CategoryButton(imageName: "figure.and.child.holdinghands", buttonName: "봉사활동", destination: CategoryListView( categoryIndex: 9))
+                    CategoryButton(imageName: "list.dash", buttonName: "기타", destination: CategoryListView(categoryIndex: 10))
                 }
                 
                 
@@ -78,8 +79,13 @@ struct HomeView: View {
                         .foregroundColor(Color("tertiary"))
                     Spacer()
                     
-                    Image(systemName: "chevron.forward")
-                        .padding(.horizontal)
+                    // * 추천 모집글 더보기 버튼
+                    NavigationLink(destination: RecommendedListView()) {
+                        Image(systemName: "chevron.forward")
+                            .padding(.horizontal)
+                            .foregroundColor(Color("tertiary"))
+                    }
+                    
                 }
                 .padding(EdgeInsets(top: 25, leading: 20, bottom: 10, trailing: 20))
                 

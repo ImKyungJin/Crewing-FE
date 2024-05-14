@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CategoryListView: View {
     
-    @State var categoryName : String
+    @State var categoryIndex : Int
     
     @State private var searchText: String = "" // TextField에 입력된 값을 저장
     
@@ -15,7 +15,6 @@ struct CategoryListView: View {
     @State private var isToggled = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     
     
     var body: some View {
@@ -34,7 +33,7 @@ struct CategoryListView: View {
                 }
 
             // * 리스트 제목
-            Text("\(categoryName)")
+            Text("\(categories[categoryIndex])")
                 .font(.system(size: 18))
                 .bold()
         }
@@ -61,15 +60,16 @@ struct CategoryListView: View {
                 }
                 .padding(.horizontal)
                 
-                
+   
                 HStack {
                     // * 카테고리 드롭다운
-                    Picker("?", selection: $selectedCategoryIndex) {
+                    Picker("", selection: $categoryIndex) {
                         ForEach(0..<categories.count) { index in
                             Text(categories[index])
+                                .tag(index)
                         }
                     }
-                    .pickerStyle(.menu) // 드롭다운 스타일 설정
+                    .pickerStyle(.menu)
                     .accentColor(.gray)
                     .padding(5)
                     
@@ -96,5 +96,5 @@ struct CategoryListView: View {
 
 
 #Preview {
-    CategoryListView(categoryName: "카테고리 이름")
+    CategoryListView(categoryIndex: 0)
 }
