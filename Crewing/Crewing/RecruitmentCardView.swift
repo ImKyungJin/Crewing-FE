@@ -19,9 +19,8 @@ struct RecruitmentCardView: View {
             HStack {
                 
                 // * 동아리 프로필 이미지
-                //RoundedRectangle(cornerRadius: 10)
+
                 Image("dummy")
-                //.stroke(Color("secondary_"), lineWidth: 1) // 이미지 경계 구분을 위한 테두리 선 추가
                     .resizable()
                     .frame(width: 68, height: 68)
                     .padding(EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 0))
