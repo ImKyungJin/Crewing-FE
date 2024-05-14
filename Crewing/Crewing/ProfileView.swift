@@ -1,17 +1,11 @@
-//
-//  ProfileView.swift
-//  Crewing
-//
-//  Created by 임경진 on 5/13/24.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
     
-    
+    @State private var isEditingInterests = false // 관심항목 수정 여부
+    @State private var selectedCategories: Set<String> = ["IT/데이터", "사진/촬영"] // 선택된 카테고리
+
     let categories = ["전체", "IT/데이터", "사진/촬영", "인문학/독서", "여행", "스포츠", "문화/예술", "댄스", "음악/악기", "봉사활동", "기타"]
-    
     
     var body: some View {
         
@@ -26,12 +20,12 @@ struct ProfileView: View {
                         .font(.system(size: 10, weight: .thin))
                         .foregroundStyle(Color("accent"))
                         .underline()
-                        .padding(.horizontal)
+                        .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 20))
                 }
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                        .padding(EdgeInsets(top: 5, leading: 20, bottom: 10, trailing: 20))
                         .frame(height: 260)
                         .foregroundColor(Color("primary_"))
                     
@@ -46,12 +40,12 @@ struct ProfileView: View {
                                 .resizable()
                                 .frame(width: 35, height: 35)
                         }
-                        .padding(3)
                         
                         // * 이름
                         Text("이름")
                             .bold()
                             .font(.system(size: 20))
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
                         
                         // * 회원 코드
                         HStack(spacing:0) {
@@ -62,29 +56,62 @@ struct ProfileView: View {
                                 .font(.system(size: 13))
                                 .foregroundColor(Color("secondary_"))
                         }
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
                         
-                        // * 관심 항목
-                        HStack {
-                            Text("\(categories[1])")
-                                .font(.system(size: 9))
-                                .padding(3)
-                                .background(Color.white)
-                                .foregroundColor(Color("secondary_"))
-                                .cornerRadius(5)
-                            Text("\(categories[2])")
-                                .font(.system(size: 9))
-                                .padding(3)
-                                .background(Color.white)
-                                .foregroundColor(Color("secondary_"))
-                                .cornerRadius(5)
+                        // 관심항목 수정하기 버튼 활성화
+                        if isEditingInterests {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    // 관심항목 띄우기
+                                    ForEach(categories, id: \.self) { category in
+                                        Button(action: {
+                                            // 버튼 클릭시
+                                            if selectedCategories.contains(category) {
+                                                selectedCategories.remove(category)
+                                            } else {
+                                                selectedCategories.insert(category)
+                                            }
+                                        }) {
+                                            // 항목 형태
+                                            Text(category)
+                                                .font(.system(size: 9))
+                                                .padding(5)
+                                                .foregroundColor(Color.black)
+                                                .cornerRadius(5)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 5)
+                                                        .stroke(selectedCategories.contains(category) ? Color("tertiary") : Color.clear, lineWidth: 1.5)
+                                                        .background(Color.white)
+                                                )
+                                                .foregroundColor(selectedCategories.contains(category) ? .black : .secondary)
+                                                .cornerRadius(5)
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25))
                         }
-                        .padding(3)
+                        
+                        // 관심항목 수정하기 버튼 비활성화
+                        if !isEditingInterests {
+                                HStack {
+                                    ForEach(Array(selectedCategories), id: \.self) { selectedCategory in
+                                        Text(selectedCategory)
+                                            .font(.system(size: 9))
+                                            .padding(5)
+                                            .foregroundColor(Color.black)
+                                            .background(Color.white)
+                                            .cornerRadius(5)
+                                    }
+                                }
+                        }
                         
                         // * 관심항목 수정 버튼
                         Button(action: {
                             // 버튼 액션
+                            isEditingInterests.toggle()
                         }) {
-                            Text("관심항목 수정하기")
+                            Text(isEditingInterests ? "저장하기" : "관심항목 수정하기")
                                 .font(.system(size: 9))
                                 .padding(EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15))
                             //.background(Color.white)
