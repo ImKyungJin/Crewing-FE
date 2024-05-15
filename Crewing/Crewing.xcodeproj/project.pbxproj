@@ -19,6 +19,7 @@
 		BE0383CB2BE004450019BE2F /* CrewingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */; };
 		BEAF991D2BF3D2F300E604A6 /* MyClubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */; };
 		BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */; };
+		BEAF99212BF4F1CC00E604A6 /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */; };
 		BEE092442BF12C9C00C9DFD4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092432BF12C9C00C9DFD4 /* MainTabView.swift */; };
 		BEE092462BF1E03300C9DFD4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092452BF1E03300C9DFD4 /* HomeView.swift */; };
 		BEE092482BF1E03E00C9DFD4 /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092472BF1E03E00C9DFD4 /* ClubView.swift */; };
@@ -63,6 +64,7 @@
 		BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClubsView.swift; sourceTree = "<group>"; };
 		BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubPageView.swift; sourceTree = "<group>"; };
+		BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
 		BEC5E39EB4FCE16988F80F9A /* Pods-CrewingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrewingTests.release.xcconfig"; path = "Target Support Files/Pods-CrewingTests/Pods-CrewingTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEE092432BF12C9C00C9DFD4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BEE092452BF1E03300C9DFD4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				BEE0924B2BF1EEAD00C9DFD4 /* RecruitmentCardView.swift */,
 				BEE0924F2BF26B2E00C9DFD4 /* RecommendedListView.swift */,
 				BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */,
+				BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */,
 			);
 			path = Crewing;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				BEE092482BF1E03E00C9DFD4 /* ClubView.swift in Sources */,
 				BEE092462BF1E03300C9DFD4 /* HomeView.swift in Sources */,
 				BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */,
+				BEAF99212BF4F1CC00E604A6 /* CommentCardView.swift in Sources */,
 				BE0383AE2BE004440019BE2F /* CrewingApp.swift in Sources */,
 				BEE0924A2BF1E04A00C9DFD4 /* ProfileView.swift in Sources */,
 				BEE092502BF26B2E00C9DFD4 /* RecommendedListView.swift in Sources */,

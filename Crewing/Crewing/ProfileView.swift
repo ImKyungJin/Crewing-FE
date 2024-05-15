@@ -9,8 +9,6 @@ struct ProfileView: View {
     
     var body: some View {
         
-        NavigationView{
-            
             VStack {
                 // * 동아리 등록 텍스트
                 HStack {
@@ -146,7 +144,6 @@ struct ProfileView: View {
                 
                 Spacer()
             } // VStack
-        } // NavigationView
     } // body
 }
 

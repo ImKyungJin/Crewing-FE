@@ -12,30 +12,34 @@ struct MainTabView: View {
     @State private var selectedTab: Tabs = .home
     
     var body: some View {
-        // TabView로 전체 레이아웃 구성
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("홈")
-                }
-                .tag(Tabs.home) // 탭 식별자 설정
+        
+        NavigationView {
             
-            ClubView()
-                .tabItem {
-                    Image(systemName: "square.stack.3d.up.fill")
-                    Text("동아리")
-                }
-                .tag(Tabs.club)
-            
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("프로필")
-                }
-                .tag(Tabs.profile)
+            // TabView로 전체 레이아웃 구성
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("홈")
+                    }
+                    .tag(Tabs.home) // 탭 식별자 설정
+                
+                ClubView()
+                    .tabItem {
+                        Image(systemName: "square.stack.3d.up.fill")
+                        Text("동아리")
+                    }
+                    .tag(Tabs.club)
+                
+                ProfileView()
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text("프로필")
+                    }
+                    .tag(Tabs.profile)
+            }
+            .background(Color.white) // 하단 탭의 배경색 설정
         }
-        .background(Color.white) // 하단 탭의 배경색 설정
     }
 }
 

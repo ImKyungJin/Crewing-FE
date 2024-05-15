@@ -7,8 +7,6 @@ struct HomeView: View {
     @State private var categoryIndex: Int = 0 // 선택된 카테고리의 인덱스
     
     var body: some View {
-        
-        NavigationView{
             
             VStack {
                 
@@ -98,7 +96,6 @@ struct HomeView: View {
                 //} // ScrollView
             } // body
         } // VStack
-    }
 }
 
 

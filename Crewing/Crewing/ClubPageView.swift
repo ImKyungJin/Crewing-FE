@@ -7,14 +7,16 @@ enum tapInfo : String, CaseIterable {
     case comments = "후기"
 }
 
+let ratings: [String: Double] = ["1점": 4, "2점": 0, "3점": 8, "4점": 75, "5점":56] // 예시 데이터
 
 
 struct ClubPageView: View {
     
     //@State private var infoTextEdit: String = "" 동아리 소개탭 편집시 사용
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var selectedPicker: tapInfo = .info
     @Namespace private var animation
+    
     
     @ViewBuilder // 뷰 생성시 전달받은 함수를 통해 하나 이상의 자식 뷰를 만드는데 사용
     private func animate() -> some View {
@@ -51,162 +53,81 @@ struct ClubPageView: View {
     }
     
     
-    // Picker를 클릭했을때 그 Picker에 맞는 뷰를 띄움
-    struct InfoAndCommentsView : View {
-        var tabState : tapInfo
-        let ratings: [String: Double] = ["5점": 256, "4점": 75, "3점": 8, "2점": 0, "1점": 3] // 예시 데이터
-        
-        var body: some View {
-            ScrollView(.vertical, showsIndicators: false) {
-                switch tabState {
-                // * 소개 탭
-                //case .info:
-                case .comments:
-                    ZStack (alignment: .top) {
-                        ScrollView {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color("content-secondary"), lineWidth: 2)
-                                Text("시작\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n끝")
-                                    .font(.system(size: 16))
-                                    .padding()
-                            }
-                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 70, trailing: 10))
-                        }
-//                        RoundedRectangle(cornerRadius: 100)
-//                            .foregroundColor(.blue)
-//                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30)
-                    } // ZStack
-                    
-                // * 후기 탭
-                //case .comments:
-                case .info:
-                    ScrollView {
-                        // * 후기 작성하기 버튼
-                        HStack {
-                            Spacer()
-                            Text("후기 작성하기")
-                                .underline()
-                                .font(.system(size: 11))
-                                .foregroundColor(Color("accent"))
-                                .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 15))
-                        }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(
-                                    AngularGradient(gradient: Gradient(colors: [Color.white, Color("gradationBlue")]), center: .topLeading, angle: .degrees(180 + 45))
-                                )
-                                .frame(width: .infinity, height: 150)
-                                .padding(.horizontal)
-                            
-                            HStack {
-                                // 별점 평균 수치 및 별 아이콘
-                                VStack {
-                                    Text("4.8")
-                                        .font(.system(size: 35))
-                                        .bold()
-                                    HStack (spacing: 1) {
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                    }
-                                }
-                                .frame(width: 170)
-  
-                                // 중앙 구분선
-                                RoundedRectangle(cornerRadius: 5)
-                                    .frame(width: 1, height: 90)
-                                    .foregroundColor(.white)
 
-                                // 별점 항목별 수치
-                                RatingBarChartView(ratings: ratings)
-                            }
-                        }
-                    } // ScrollView
-                }
-            }
-        }
-    }
-    
-    
-  
-    
+    // * 화면을 구성하는 View 코드 부분
     var body: some View {
         VStack {
-            
-            ZStack (alignment: .bottom) {
-                // * 동아리 이미지
-                RoundedRectangle(cornerRadius: 10)
-                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20))
-                    .frame(height: 220)
-                    .foregroundColor(Color("tertiary"))
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 70)
-                        .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
-                        .foregroundColor(Color.white)
-                    
-                    // * 동아리 이름 및 한 줄 소개
-                    VStack {
-                        HStack {
-                            Text("동학대학운동")
-                                .font(.system(size: 14))
-                                .bold()
-                            Spacer()
-                        }
-                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 1, trailing: 0))
-                        HStack {
-                            Text("사이드 프로젝트 진행하는 IT동아리")
-                                .font(.system(size: 12))
-                                .foregroundColor(Color("secondary_"))
-                            Spacer()
-                        }
-                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+            // * 뒤로가기 버튼
+            Button(action:{
+                self.presentationMode.wrappedValue.dismiss()}) {
+                    HStack(spacing:2) {
+                        Image(systemName: "chevron.backward")
+                        Spacer()
                     }
-                    .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
-                    
-                } // ZStack
-                .frame(height: 100)
-            } // ZStack
-            .frame(height: 220)
-            .padding(.top)
-            
-            
-            
-            ZStack(alignment: .top) {
-                
-                // * 탭 배경
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width) // 화면 너비와 일치하도록 설정
-                    .frame(height: UIScreen.main.bounds.height * 0.7) // 화면 높이의 일부분으로 설정
-                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 2, y: 0)
-                
-                // * 탭
-                VStack {
-                    animate()
-                    InfoAndCommentsView(tabState: selectedPicker)
+                    .foregroundColor(.black)
+                    .padding(EdgeInsets(top: 20, leading: 15, bottom: 10, trailing: 0))
                 }
-            }
-
-            Spacer()
             
+            ScrollView {
+                ZStack (alignment: .bottom) {
+                    // * 동아리 이미지
+                    RoundedRectangle(cornerRadius: 10)
+                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20))
+                        .frame(height: 220)
+                        .foregroundColor(Color("tertiary"))
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(height: 70)
+                            .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
+                            .foregroundColor(Color.white)
+                        
+                        // * 동아리 이름 및 한 줄 소개
+                        VStack {
+                            HStack {
+                                Text("동학대학운동")
+                                    .font(.system(size: 14))
+                                    .bold()
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 1, trailing: 0))
+                            HStack {
+                                Text("사이드 프로젝트 진행하는 IT동아리")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("secondary_"))
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
+                        
+                    } // ZStack
+                    .frame(height: 100)
+                } // ZStack
+                .frame(height: 220)
+                
+                
+                ZStack(alignment: .top) {
+                    // * 탭 배경
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width) // 화면 너비와 일치하도록 설정
+                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: -5)
+                    
+                    // * 탭
+                    VStack {
+                        animate()
+                        InfoAndCommentsView(tabState: selectedPicker)
+                    }
+                }
+            } // ScrollView
         } // VStack
         .navigationBarBackButtonHidden() // 뒤로가기 버튼 숨기기
-        .padding(EdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0))
-    }
+    } // body
 }
 
 
+// * 리뷰 차트 구성
 struct RatingBarChartView: View {
     let ratings: [String: Double] // 각 별점 항목과 해당 수치
     
@@ -215,13 +136,16 @@ struct RatingBarChartView: View {
             let maxValue = ratings.values.max() ?? 1 // 최댓값, 0으로 나누는 것을 방지하기 위해 1로 설정
             ForEach(ratings.sorted(by: { $0.key < $1.key }), id: \.key) { (label, value) in
                 HStack (spacing:1) {
+                    // "1점", "2점", "3점", "4점", "5점"
                     Text(label)
                         .padding(.leading)
                         .font(.system(size: 10))
                         .bold()
                         .foregroundColor(Color("tertiary"))
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
+                    // 막대 바
                     BarView(value: value, maxValue: maxValue)
+                    // 리뷰 개수
                     Text("\(Int(value))")
                         .font(.system(size: 10))
                         .bold()
@@ -235,6 +159,8 @@ struct RatingBarChartView: View {
     }
 }
 
+
+// * 막대 그래프 그리기
 struct BarView: View {
     let value: Double
     let maxValue: Double
@@ -269,11 +195,134 @@ struct BarView: View {
     }
 }
 
+// Picker를 클릭했을때 그 Picker에 맞는 뷰 띄우기
+struct InfoAndCommentsView : View {
+    
+    var tabState : tapInfo
+    
+    // 별점 평균과 관련된 변수들을 선언
+    var totalSum: Double
+    var totalCount: Double
+    var average: Double
+    var integerPart: Int
+    var decimalPart: Int
+    var starCount: Int
+    var remainingStarCount: Int
+    
+    // 초기화 시 평균과 관련된 변수들을 계산
+    init(tabState: tapInfo) {
+        self.tabState = tabState
+        self.totalSum=0
+        self.totalCount=0
+        self.average=0
+        self.integerPart=0
+        self.decimalPart=0
+        self.starCount=0
+        self.remainingStarCount=0
+
+        for (key, value) in ratings {
+            let removedDot = key.filter { !$0.isLetter } // "5점" 문자열에서 "5"만 추출하기
+            if let intValue = Int(removedDot) { // 문자열 "5"를 정수로 변환
+                totalSum += Double(intValue) * value
+                totalCount += value
+            } else {
+                print("Error: Cannot convert \(removedDot) to integer")
+            }
+        }
+        
+        average = totalSum / totalCount
+        integerPart = Int(average)
+        decimalPart = Int((average - Double(integerPart)) * 10)
+        starCount = min(integerPart, 5)
+        remainingStarCount = max(0, 5 - starCount)
+    }
 
 
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            switch tabState {
+            // * 소개 탭
+            //case .info:
+            case .comments:
+                ZStack (alignment: .top) {
+                    ScrollView {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(Color("content-secondary"), lineWidth: 2)
+                            Text("시작\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n끝")
+                                .font(.system(size: 16))
+                                .padding()
+                        }
+                        .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
+                    }
+//                        RoundedRectangle(cornerRadius: 100)
+//                            .foregroundColor(.blue)
+//                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30)
+                } // ZStack
+                
+            // * 후기 탭
+            //case .comments:
+            case .info:
+                ScrollView {
+                    // * 후기 작성하기 버튼
+                    HStack {
+                        Spacer()
+                        Text("후기 작성하기")
+                            .underline()
+                            .font(.system(size: 11))
+                            .foregroundColor(Color("accent"))
+                            .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 15))
+                    }
+                    
+                    // * 후기 평점 차트
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(
+                                AngularGradient(gradient: Gradient(colors: [Color.white, Color("gradationBlue")]), center: .topLeading, angle: .degrees(180 + 45))
+                            )
+                            .frame(width: .infinity, height: 150)
+                            .padding(.horizontal)
+                        
+                        HStack {
+                            // 별점 평균 수치 및 별 아이콘
+                            VStack {
+                                Text("\(integerPart).\(decimalPart)") // 평균 점수 표시
+                                    .font(.system(size: 35))
+                                    .bold()
 
+                                HStack(spacing: 1) {
+                                    ForEach(0..<starCount, id: \.self) { _ in
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.yellow)
+                                    }
+                                    ForEach(0..<remainingStarCount, id: \.self) { _ in
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                            }
+                            .frame(width: 170)
 
+                            // 중앙 구분선
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 1, height: 90)
+                                .foregroundColor(.white)
 
+                            // 별점 항목별 수치
+                            RatingBarChartView(ratings: ratings)
+                        }
+                    }
+                    .padding(.bottom)
+                    
+                    ForEach(0..<5) { _ in
+                        CommentCardView()
+                    }
+                    
+                } // ScrollView
+            }
+        }
+    }
+}
 
 #Preview {
     ClubPageView()
