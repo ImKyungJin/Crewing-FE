@@ -12,7 +12,6 @@ struct ProfileView: View {
         NavigationView{
             
             VStack {
-                
                 // * 동아리 등록 텍스트
                 HStack {
                     Spacer()
@@ -139,10 +138,10 @@ struct ProfileView: View {
                 .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
                 
                 HStack {
-                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: CategoryListView(categoryIndex: 6))
-                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: CategoryListView(categoryIndex: 6))
-                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: CategoryListView(categoryIndex: 6))
-                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: CategoryListView(categoryIndex: 6))
+                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: ClubPageView())
+                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: ClubPageView())
+                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: ClubPageView())
+                    ClubButton(imageName: "dummy", clubName: "노스페어스", destination: ClubPageView())
                 }
                 
                 Spacer()

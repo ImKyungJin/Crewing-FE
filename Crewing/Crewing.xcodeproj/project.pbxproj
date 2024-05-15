@@ -18,6 +18,7 @@
 		BE0383C92BE004450019BE2F /* CrewingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383C82BE004450019BE2F /* CrewingUITests.swift */; };
 		BE0383CB2BE004450019BE2F /* CrewingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */; };
 		BEAF991D2BF3D2F300E604A6 /* MyClubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */; };
+		BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */; };
 		BEE092442BF12C9C00C9DFD4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092432BF12C9C00C9DFD4 /* MainTabView.swift */; };
 		BEE092462BF1E03300C9DFD4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092452BF1E03300C9DFD4 /* HomeView.swift */; };
 		BEE092482BF1E03E00C9DFD4 /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE092472BF1E03E00C9DFD4 /* ClubView.swift */; };
@@ -61,6 +62,7 @@
 		BE0383C82BE004450019BE2F /* CrewingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewingUITests.swift; sourceTree = "<group>"; };
 		BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClubsView.swift; sourceTree = "<group>"; };
+		BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubPageView.swift; sourceTree = "<group>"; };
 		BEC5E39EB4FCE16988F80F9A /* Pods-CrewingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrewingTests.release.xcconfig"; path = "Target Support Files/Pods-CrewingTests/Pods-CrewingTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEE092432BF12C9C00C9DFD4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BEE092452BF1E03300C9DFD4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -128,7 +130,6 @@
 		BE0383A12BE004440019BE2F = {
 			isa = PBXGroup;
 			children = (
-				BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */,
 				BE0383AC2BE004440019BE2F /* Crewing */,
 				BE0383BD2BE004450019BE2F /* CrewingTests */,
 				BE0383C72BE004450019BE2F /* CrewingUITests */,
@@ -151,6 +152,7 @@
 		BE0383AC2BE004440019BE2F /* Crewing */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */,
 				BEE0924D2BF1FE7200C9DFD4 /* CategoryListView.swift */,
 				BE0383AD2BE004440019BE2F /* CrewingApp.swift */,
 				BE0383AF2BE004440019BE2F /* ContentView.swift */,
@@ -162,6 +164,7 @@
 				BEE092492BF1E04A00C9DFD4 /* ProfileView.swift */,
 				BEE0924B2BF1EEAD00C9DFD4 /* RecruitmentCardView.swift */,
 				BEE0924F2BF26B2E00C9DFD4 /* RecommendedListView.swift */,
+				BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */,
 			);
 			path = Crewing;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				BE0383B02BE004440019BE2F /* ContentView.swift in Sources */,
 				BEE092482BF1E03E00C9DFD4 /* ClubView.swift in Sources */,
 				BEE092462BF1E03300C9DFD4 /* HomeView.swift in Sources */,
+				BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */,
 				BE0383AE2BE004440019BE2F /* CrewingApp.swift in Sources */,
 				BEE0924A2BF1E04A00C9DFD4 /* ProfileView.swift in Sources */,
 				BEE092502BF26B2E00C9DFD4 /* RecommendedListView.swift in Sources */,

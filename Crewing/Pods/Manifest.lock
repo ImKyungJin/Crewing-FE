@@ -1,20 +1,26 @@
 PODS:
-  - DropDown (2.3.13)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - IQKeyboardManagerSwift (7.0.3)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
-  - DropDown
+  - Charts
   - IQKeyboardManagerSwift
 
 SPEC REPOS:
   trunk:
-    - DropDown
+    - Charts
     - IQKeyboardManagerSwift
+    - SwiftAlgorithms
 
 SPEC CHECKSUMS:
-  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   IQKeyboardManagerSwift: f9c5dc36cba16ddd2e51fa7d51c34a2e083029b5
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: b1fd53ee02bc0e361521da1a7538a02914ae21b6
+PODFILE CHECKSUM: 0a2f8694cb4f6390fda254c363278ef30986c4b9
 
 COCOAPODS: 1.15.2

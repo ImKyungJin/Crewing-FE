@@ -18,6 +18,6 @@ target 'Crewing' do
 
   pod 'IQKeyboardManagerSwift'
 
-  pod 'DropDown'
+  pod 'Charts'
 
 end
