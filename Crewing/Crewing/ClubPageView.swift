@@ -58,103 +58,127 @@ struct ClubPageView: View {
 
     // * 화면을 구성하는 View 코드 부분
     var body: some View {
-        VStack {
-            // * 뒤로가기 버튼
-            Button(action:{
-                self.presentationMode.wrappedValue.dismiss()}) {
-                    HStack(spacing:2) {
-                        Image(systemName: "chevron.backward")
-                        Spacer()
-                    }
-                    .foregroundColor(.black)
-                    .padding(EdgeInsets(top: 20, leading: 15, bottom: 10, trailing: 0))
-                }
-            
-            ScrollView {
-                ZStack (alignment: .bottom) {
-                    // * 동아리 이미지
-                    RoundedRectangle(cornerRadius: 10)
-                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20))
-                        .frame(height: 220)
-                        .foregroundColor(Color("tertiary"))
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(height: 70)
-                            .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
-                            .foregroundColor(Color.white)
-                        
-                        // * 동아리 이름 및 한 줄 소개
-                        VStack {
-                            HStack {
-                                Text("동학대학운동")
-                                    .font(.system(size: 14))
-                                    .bold()
-                                Spacer()
-                            }
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 1, trailing: 0))
-                            HStack {
-                                Text("사이드 프로젝트 진행하는 IT동아리")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(Color("secondary_"))
-                                Spacer()
-                            }
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+        ZStack {
+            VStack {
+                // * 뒤로가기 버튼
+                Button(action:{
+                    self.presentationMode.wrappedValue.dismiss()}) {
+                        HStack(spacing:2) {
+                            Image(systemName: "chevron.backward")
+                            Spacer()
                         }
-                        .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
+                        .foregroundColor(.black)
+                        .padding(EdgeInsets(top: 20, leading: 15, bottom: 10, trailing: 0))
+                    }
+                
+                ScrollView {
+                    ZStack (alignment: .bottom) {
+                        // * 동아리 이미지
+                        RoundedRectangle(cornerRadius: 10)
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20))
+                            .frame(height: 220)
+                            .foregroundColor(Color("tertiary"))
                         
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(height: 70)
+                                .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
+                                .foregroundColor(Color.white)
+                            
+                            // * 동아리 이름 및 한 줄 소개
+                            VStack {
+                                HStack {
+                                    Text("동학대학운동")
+                                        .font(.system(size: 14))
+                                        .bold()
+                                    Spacer()
+                                }
+                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 1, trailing: 0))
+                                HStack {
+                                    Text("사이드 프로젝트 진행하는 IT동아리")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(Color("secondary_"))
+                                    Spacer()
+                                }
+                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 35, bottom: 30, trailing: 35))
+                            
+                        } // ZStack
+                        .frame(height: 100)
                     } // ZStack
-                    .frame(height: 100)
-                } // ZStack
-                .frame(height: 220)
-                
-                
-                ZStack(alignment: .top) {
-                    // * 탭 배경
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width) // 화면 너비와 일치하도록 설정
-                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: -5)
+                    .frame(height: 220)
                     
-                    // * 탭
-                    VStack {
-                        animate()
-                        //InfoAndCommentsView(tabState: selectedPicker)
-                        InfoAndCommentsView(tabState: selectedPicker, isShowingPopup: $isShowingPopup)
-
+                    
+                    ZStack(alignment: .top) {
+                        // * 탭 배경
+                        RoundedRectangle(cornerRadius: 30)
+                            .foregroundColor(.white)
+                            .frame(width: UIScreen.main.bounds.width) // 화면 너비와 일치하도록 설정
+                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: -5)
+                        
+                        // * 탭
+                        VStack {
+                            animate()
+                            InfoAndCommentsView(tabState: selectedPicker, isShowingPopup: $isShowingPopup)
+                            
+                        }
+                    }
+                } // ScrollView
+            } // VStack
+            .navigationBarBackButtonHidden() // 뒤로가기 버튼 숨기기
+            .overlay(
+                Group {
+                    if isShowingPopup {
+                        Color.black.opacity(0.4) // 반투명한 검은색 배경
+                            .edgesIgnoringSafeArea(.all) //화면의 안전 영역을 무시하고 전체 화면을 덮도록
+                        //showNoActivityRecordPopupView()
+                        showReviewPopupView()
+                            .frame(width: 350, height: 420)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .overlay(
+                                // 닫기 버튼
+                                Button(action: {
+                                    withAnimation {
+                                        isShowingPopup = false
+                                    }
+                                }) {
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .frame(width: 15, height: 15)
+                                        .foregroundColor(.black)
+                                        .padding(20)
+                                }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            )
                     }
                 }
-            } // ScrollView
-        } // VStack
-        .navigationBarBackButtonHidden() // 뒤로가기 버튼 숨기기
-        .overlay(
-            Group {
-                if isShowingPopup {
-                    Color.black.opacity(0.4) // 반투명한 검은색 배경
-                        .edgesIgnoringSafeArea(.all) //화면의 안전 영역을 무시하고 전체 화면을 덮도록
-                    //showNoActivityRecordPopupView()
-                    showReviewPopupView()
-                        .frame(width: 350, height: 420)
-                        .background(Color.white)
-                        .cornerRadius(20)
-                        .overlay(
-                            // 닫기 버튼
-                            Button(action: {
-                                withAnimation {
-                                    isShowingPopup = false
-                                }
-                            }) {
-                                Image(systemName: "xmark")
-                                    .resizable()
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(.black)
-                                    .padding(20)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                        )
+            ) // overlay
+            
+            // 소개탭이 선택된 경우에만 지원 버튼 표시
+            if selectedPicker == .info {
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSeXFCBJgdHoZvjTMmR043AEKEv4OBQ9ulUatmS4XKHmVtW8dQ/viewform?usp=sf_link") {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 100)
+                                .foregroundColor(Color("accent"))
+                                .frame(width: 200, height: 50)
+                                        
+                            Text("지원하러 가기")
+                                .font(.system(size: 15))
+                                .bold()
+                                .foregroundColor(.white)
+                        }
+                    }
                 }
-            }
-        ) // overlay
+            } // 지원 버튼
+        } //ZStack
     } // body
 }
 
@@ -225,10 +249,8 @@ struct InfoAndCommentsView : View {
                         }
                         .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
                     }
-//                        RoundedRectangle(cornerRadius: 100)
-//                            .foregroundColor(.blue)
-//                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30)
                 } // ZStack
+
                 
             // * 후기 탭
             case .comments:
