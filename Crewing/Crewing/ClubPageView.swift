@@ -17,6 +17,8 @@ struct ClubPageView: View {
     @State private var selectedPicker: tapInfo = .info
     @Namespace private var animation
     
+    // 팝업창 표시 여부를 제어하는 상태 변수 추가
+    @State private var isShowingPopup = false
     
     @ViewBuilder // 뷰 생성시 전달받은 함수를 통해 하나 이상의 자식 뷰를 만드는데 사용
     private func animate() -> some View {
@@ -117,83 +119,46 @@ struct ClubPageView: View {
                     // * 탭
                     VStack {
                         animate()
-                        InfoAndCommentsView(tabState: selectedPicker)
+                        //InfoAndCommentsView(tabState: selectedPicker)
+                        InfoAndCommentsView(tabState: selectedPicker, isShowingPopup: $isShowingPopup)
+
                     }
                 }
             } // ScrollView
         } // VStack
         .navigationBarBackButtonHidden() // 뒤로가기 버튼 숨기기
+        .overlay(
+            Group {
+                if isShowingPopup {
+                    Color.black.opacity(0.4) // 반투명한 검은색 배경
+                        .edgesIgnoringSafeArea(.all) //화면의 안전 영역을 무시하고 전체 화면을 덮도록
+                    //showNoActivityRecordPopupView()
+                    showReviewPopupView()
+                        .frame(width: 350, height: 420)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .overlay(
+                            // 닫기 버튼
+                            Button(action: {
+                                withAnimation {
+                                    isShowingPopup = false
+                                }
+                            }) {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(.black)
+                                    .padding(20)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        )
+                }
+            }
+        ) // overlay
     } // body
 }
 
 
-// * 리뷰 차트 구성
-struct RatingBarChartView: View {
-    let ratings: [String: Double] // 각 별점 항목과 해당 수치
-    
-    var body: some View {
-        VStack {
-            let maxValue = ratings.values.max() ?? 1 // 최댓값, 0으로 나누는 것을 방지하기 위해 1로 설정
-            ForEach(ratings.sorted(by: { $0.key < $1.key }), id: \.key) { (label, value) in
-                HStack (spacing:1) {
-                    // "1점", "2점", "3점", "4점", "5점"
-                    Text(label)
-                        .padding(.leading)
-                        .font(.system(size: 10))
-                        .bold()
-                        .foregroundColor(Color("tertiary"))
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
-                    // 막대 바
-                    BarView(value: value, maxValue: maxValue)
-                    // 리뷰 개수
-                    Text("\(Int(value))")
-                        .font(.system(size: 10))
-                        .bold()
-                        .foregroundColor(Color("tertiary"))
-                        .padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 0))
-                    Spacer()
-                }
-            }
-        }
-        .frame(width: 170, height: 150)
-    }
-}
-
-
-// * 막대 그래프 그리기
-struct BarView: View {
-    let value: Double
-    let maxValue: Double
-    
-    var body: some View {
-        if value == 0 { // 모든 값이 0인 경우도 고려
-            let barWidth = CGFloat(value / maxValue) * 80 // 최댓값을 기준으로 비율 계산
-            return AnyView(
-                HStack {
-                    ZStack (alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: 80, height: 10)
-                            .foregroundColor(.white)
-                    }
-                }
-            )
-        } else {
-            let barWidth = CGFloat(value / maxValue) * 80 // 최댓값을 기준으로 비율 계산
-            return AnyView(
-                HStack {
-                    ZStack (alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: 80, height: 10)
-                            .foregroundColor(.white)
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: barWidth, height: 10)
-                            .foregroundColor(.yellow)
-                    }
-                }
-            )
-        }
-    }
-}
 
 // Picker를 클릭했을때 그 Picker에 맞는 뷰 띄우기
 struct InfoAndCommentsView : View {
@@ -209,8 +174,11 @@ struct InfoAndCommentsView : View {
     var starCount: Int
     var remainingStarCount: Int
     
+    // 팝업창 표시 여부를 제어하는 바인딩 변수 추가
+    @Binding var isShowingPopup: Bool
+    
     // 초기화 시 평균과 관련된 변수들을 계산
-    init(tabState: tapInfo) {
+    init(tabState: tapInfo, isShowingPopup: Binding<Bool>) {
         self.tabState = tabState
         self.totalSum=0
         self.totalCount=0
@@ -219,6 +187,8 @@ struct InfoAndCommentsView : View {
         self.decimalPart=0
         self.starCount=0
         self.remainingStarCount=0
+        
+        self._isShowingPopup = isShowingPopup // 바인딩 변수 초기화
 
         for (key, value) in ratings {
             let removedDot = key.filter { !$0.isLetter } // "5점" 문자열에서 "5"만 추출하기
@@ -242,8 +212,8 @@ struct InfoAndCommentsView : View {
         ScrollView(.vertical, showsIndicators: false) {
             switch tabState {
             // * 소개 탭
-            //case .info:
-            case .comments:
+            case .info:
+            //case .comments:
                 ZStack (alignment: .top) {
                     ScrollView {
                         ZStack {
@@ -261,8 +231,8 @@ struct InfoAndCommentsView : View {
                 } // ZStack
                 
             // * 후기 탭
-            //case .comments:
-            case .info:
+            case .comments:
+            //case .info:
                 ScrollView {
                     // * 후기 작성하기 버튼
                     HStack {
@@ -272,6 +242,9 @@ struct InfoAndCommentsView : View {
                             .font(.system(size: 11))
                             .foregroundColor(Color("accent"))
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 15))
+                            .onTapGesture {
+                                isShowingPopup = true // 팝업창 표시
+                            }
                     }
                     
                     // * 후기 평점 차트
@@ -293,7 +266,7 @@ struct InfoAndCommentsView : View {
                                 HStack(spacing: 1) {
                                     ForEach(0..<starCount, id: \.self) { _ in
                                         Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
+                                            .foregroundColor(Color("starColor"))
                                     }
                                     ForEach(0..<remainingStarCount, id: \.self) { _ in
                                         Image(systemName: "star.fill")
@@ -323,6 +296,10 @@ struct InfoAndCommentsView : View {
         }
     }
 }
+
+
+
+
 
 #Preview {
     ClubPageView()

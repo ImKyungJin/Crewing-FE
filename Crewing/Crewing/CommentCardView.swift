@@ -16,7 +16,7 @@ struct CommentCardView: View {
                         Image(systemName: "star.fill")
                             .resizable()
                             .frame(width: 12, height: 12)
-                            .foregroundColor(.yellow)
+                            .foregroundColor(Color("starColor"))
                     }
                     Spacer()
                 }

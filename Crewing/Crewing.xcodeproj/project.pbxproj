@@ -17,6 +17,9 @@
 		BE0383BF2BE004450019BE2F /* CrewingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383BE2BE004450019BE2F /* CrewingTests.swift */; };
 		BE0383C92BE004450019BE2F /* CrewingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383C82BE004450019BE2F /* CrewingUITests.swift */; };
 		BE0383CB2BE004450019BE2F /* CrewingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */; };
+		BE22BB3B2BF74ABB00601912 /* RatingBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22BB3A2BF74ABB00601912 /* RatingBarChartView.swift */; };
+		BE22BB3D2BF903FE00601912 /* showNoActivityRecordPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22BB3C2BF903FE00601912 /* showNoActivityRecordPopupView.swift */; };
+		BE22BB3F2BF9044600601912 /* showReviewPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22BB3E2BF9044600601912 /* showReviewPopupView.swift */; };
 		BEAF991D2BF3D2F300E604A6 /* MyClubsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */; };
 		BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */; };
 		BEAF99212BF4F1CC00E604A6 /* CommentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */; };
@@ -62,6 +65,9 @@
 		BE0383C42BE004450019BE2F /* CrewingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrewingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0383C82BE004450019BE2F /* CrewingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewingUITests.swift; sourceTree = "<group>"; };
 		BE0383CA2BE004450019BE2F /* CrewingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BE22BB3A2BF74ABB00601912 /* RatingBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingBarChartView.swift; sourceTree = "<group>"; };
+		BE22BB3C2BF903FE00601912 /* showNoActivityRecordPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showNoActivityRecordPopupView.swift; sourceTree = "<group>"; };
+		BE22BB3E2BF9044600601912 /* showReviewPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showReviewPopupView.swift; sourceTree = "<group>"; };
 		BEAF991C2BF3D2F300E604A6 /* MyClubsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClubsView.swift; sourceTree = "<group>"; };
 		BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubPageView.swift; sourceTree = "<group>"; };
 		BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCardView.swift; sourceTree = "<group>"; };
@@ -168,6 +174,9 @@
 				BEE0924F2BF26B2E00C9DFD4 /* RecommendedListView.swift */,
 				BEAF991E2BF3E0EC00E604A6 /* ClubPageView.swift */,
 				BEAF99202BF4F1CC00E604A6 /* CommentCardView.swift */,
+				BE22BB3A2BF74ABB00601912 /* RatingBarChartView.swift */,
+				BE22BB3C2BF903FE00601912 /* showNoActivityRecordPopupView.swift */,
+				BE22BB3E2BF9044600601912 /* showReviewPopupView.swift */,
 			);
 			path = Crewing;
 			sourceTree = "<group>";
@@ -441,12 +450,15 @@
 				BEAF991F2BF3E0EC00E604A6 /* ClubPageView.swift in Sources */,
 				BEAF99212BF4F1CC00E604A6 /* CommentCardView.swift in Sources */,
 				BE0383AE2BE004440019BE2F /* CrewingApp.swift in Sources */,
+				BE22BB3F2BF9044600601912 /* showReviewPopupView.swift in Sources */,
 				BEE0924A2BF1E04A00C9DFD4 /* ProfileView.swift in Sources */,
+				BE22BB3D2BF903FE00601912 /* showNoActivityRecordPopupView.swift in Sources */,
 				BEE092502BF26B2E00C9DFD4 /* RecommendedListView.swift in Sources */,
 				BEE092442BF12C9C00C9DFD4 /* MainTabView.swift in Sources */,
 				BEE0924E2BF1FE7200C9DFD4 /* CategoryListView.swift in Sources */,
 				BEAF991D2BF3D2F300E604A6 /* MyClubsView.swift in Sources */,
 				BEE0924C2BF1EEAD00C9DFD4 /* RecruitmentCardView.swift in Sources */,
+				BE22BB3B2BF74ABB00601912 /* RatingBarChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
